@@ -1,4 +1,4 @@
-﻿// Copyright Epic Games, Inc. All Rights Reserved.
+// Copyright Epic Games, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -13,11 +13,5 @@ public:
 #pragma region ModuleOverrides
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;
-#pragma endregion
-
-#pragma region Properties
-private:
-	const FSlateBrush* previousAppIcon = nullptr;
-	bool bAppIconOverridden = false;
 #pragma endregion
 };
