@@ -1,4 +1,4 @@
-﻿// Copyright Epic Games, Inc. All Rights Reserved.
+// Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "EngineIconSetter.h"
 
@@ -17,9 +17,7 @@ void FEngineIconSetterModule::StartupModule()
 		if (const TSharedPtr<IPlugin> plugin = IPluginManager::Get().FindPlugin(TEXT("EngineIconSetter")))
 		{
 			const FString iconPath = plugin->GetBaseDir() / TEXT("Resources/Icon.svg");
-			previousAppIcon = styleSet->GetBrush("AppIcon");
 			styleSet->Set("AppIcon", new FSlateVectorImageBrush(iconPath, FVector2D(48.0f, 48.0f)));
-			bAppIconOverridden = true;
 		}
 		else
 		{
@@ -32,21 +30,7 @@ void FEngineIconSetterModule::StartupModule()
 	}
 }
 
-void FEngineIconSetterModule::ShutdownModule()
-{
-	if (!bAppIconOverridden || !previousAppIcon)
-	{
-		return;
-	}
-
-	if (FSlateStyleSet* styleSet = const_cast<FSlateStyleSet*>(static_cast<const FSlateStyleSet*>(&FAppStyle::Get())))
-	{
-		styleSet->Set("AppIcon", const_cast<FSlateBrush*>(previousAppIcon));
-	}
-
-	previousAppIcon = nullptr;
-	bAppIconOverridden = false;
-}
+void FEngineIconSetterModule::ShutdownModule() {}
 
 #undef LOCTEXT_NAMESPACE
 
